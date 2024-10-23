@@ -54,7 +54,7 @@ def test_create_object(test_client):
 
     # Testing for object with duplicate id
     response = test_client.post("/", json=new_object)
-    assert response.status_code == status.HTTP_404_NOT_FOUND
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert response.json() == {"detail": f"Object with id {new_object['id']} already exists"}
 
 def test_create_object_invalid_email(test_client):

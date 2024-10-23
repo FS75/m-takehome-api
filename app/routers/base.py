@@ -30,7 +30,7 @@ def create_object(new_object: ObjectModel, object_processing_service: ObjectProc
 
         added_obj = add_object(processed_object)
         if not added_obj:
-            raise HTTPException(status_code=404, detail=f"Object with id {new_object.id} already exists")
+            raise HTTPException(status_code=400, detail=f"Object with id {new_object.id} already exists")
         return {"message": "Object added", "object": added_obj}
 
     except ValueError as e:
