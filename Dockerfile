@@ -16,5 +16,8 @@ COPY . .
 # Expose the port that the app runs on
 EXPOSE 8080
 
+# Run tests
+RUN pytest
+
 # Command to run the application
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]
