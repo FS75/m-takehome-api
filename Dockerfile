@@ -17,7 +17,7 @@ COPY . .
 COPY .env .env
 
 # Expose the port that the app runs on
-EXPOSE 8000
+EXPOSE 8080
 
 # Command to run the application
 CMD ["python", "-m", "app"]
