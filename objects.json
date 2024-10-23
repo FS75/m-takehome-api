@@ -1,0 +1,20 @@
+[
+    {
+        "id": "1",
+        "full_name": "Junji Ito",
+        "email": "junji.ito@abc.com",
+        "mobile_number": "12345678"
+    },
+    {
+        "id": "2",
+        "full_name": "Kentaro Miura",
+        "email": "kentaro.miura@xyz.com",
+        "mobile_number": "88888888"
+    },
+    {
+        "id": "3",
+        "full_name": "Naoki Urasawa",
+        "email": "naoki.urasawa@fgh.com",
+        "mobile_number": "98009800"
+    }
+]
