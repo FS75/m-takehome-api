@@ -24,8 +24,10 @@ def get_all_objects():
 @router.post("/", status_code=200)
 def create_object(new_object: ObjectModel):
     """Add a new object to the in-memory data list."""
-    add_object(new_object)
-    return {"message": "Object added", "object": new_object}
+    added_obj = add_object(new_object)
+    if not added_obj:
+        raise HTTPException(status_code=404, detail=f"Object with id {new_object.id} already exists")
+    return {"message": "Object added", "object": added_obj}
 
 @router.delete("/{object_id}", status_code=200)
 def remove_object(object_id: str):

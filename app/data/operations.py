@@ -17,9 +17,14 @@ def load_objects_from_json(file_path: str) -> None:
         print(f"Error decoding JSON: {e}")
 
 def add_object(new_object: ObjectModel) -> None:
-    # Add a new object to the global data list
-    global data
+    # Check if an object with the same id already exists
+    for obj in data:
+        if obj.id == new_object.id:
+            return None
+            
+    # Add the new object to the global data list
     data.append(new_object)
+    return new_object
 
 def delete_object(object_id: str) -> Optional[ObjectModel]:
     # Delete an object by ID from the global data list
