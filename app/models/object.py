@@ -5,3 +5,6 @@ class ObjectModel(BaseModel):
     full_name: str
     email: str
     mobile_number: str
+
+    class Config:
+        extra = 'forbid'
