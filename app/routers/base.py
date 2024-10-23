@@ -21,13 +21,13 @@ def get_all_objects():
 
     raise HTTPException(status_code=404, detail="No objects found")
 
-@router.post("/", status_code=201)
+@router.post("/", status_code=200)
 def create_object(new_object: ObjectModel):
     """Add a new object to the in-memory data list."""
     add_object(new_object)
     return {"message": "Object added", "object": new_object}
 
-@router.delete("/{object_id}")
+@router.delete("/{object_id}", status_code=200)
 def remove_object(object_id: str):
     """Delete an object by ID from the in-memory data list."""
     deleted_obj = delete_object(object_id)
