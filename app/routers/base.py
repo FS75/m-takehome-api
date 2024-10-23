@@ -1,7 +1,8 @@
 from typing import List
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from app.models.object import ObjectModel
 from app.data.operations import data, add_object, delete_object
+from app.services.object_processing import ObjectProcessingService
 
 router = APIRouter()
 
@@ -22,12 +23,19 @@ def get_all_objects():
     raise HTTPException(status_code=404, detail="No objects found")
 
 @router.post("/", status_code=200)
-def create_object(new_object: ObjectModel):
+def create_object(new_object: ObjectModel, object_processing_service: ObjectProcessingService = Depends(ObjectProcessingService)):
     """Add a new object to the in-memory data list."""
-    added_obj = add_object(new_object)
-    if not added_obj:
-        raise HTTPException(status_code=404, detail=f"Object with id {new_object.id} already exists")
-    return {"message": "Object added", "object": added_obj}
+    try:
+        processed_object = object_processing_service.process_object(new_object)
+
+        added_obj = add_object(processed_object)
+        if not added_obj:
+            raise HTTPException(status_code=404, detail=f"Object with id {new_object.id} already exists")
+        return {"message": "Object added", "object": added_obj}
+
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 @router.delete("/{object_id}", status_code=200)
 def remove_object(object_id: str):

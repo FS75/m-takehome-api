@@ -35,7 +35,7 @@ def delete_object(object_id: str) -> Optional[ObjectModel]:
         if obj.id == object_id:
             data.remove(obj)
             return obj
-    print(f"Object with id {object_id} not found.")
+    # print(f"Object with id {object_id} not found.")
     return None
 
 
